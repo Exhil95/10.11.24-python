@@ -1,4 +1,8 @@
 import time
+import sys
+
+sys.set_int_max_str_digits(10000)
+
 def fibonacci(n):
     if n < 0:
         raise ValueError("Wartość musi być nieujemna")
@@ -6,11 +10,15 @@ def fibonacci(n):
         return 0
     elif n == 1:
         return 1
-    else:
-        return fibonacci(n - 1) + fibonacci(n - 2)
+    
+    a, b = 0, 1
+    for _ in range(2, n + 1):
+        a, b = b, a + b
+    return b
+
 start = time.time()
-n = 100 
-print(f"Numer wartość ciągu fibonnaciego dla wartości {n} jest {fibonacci(n)}")
+n = 40000 
+print(f"Numer wartość ciągu Fibonacciego dla wartości {n} jest {fibonacci(n)}")
 koniec = time.time()
 
-print(koniec - start)
+print(f"Czas wykonania: {koniec - start} sekund")
